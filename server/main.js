@@ -1,5 +1,6 @@
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(() => {
-  // code to run on server at startup
-});
+// Meteor.startup(() => {
+//   // code to run on server at startup
+// });
+import '../imports/api/canvases.js';

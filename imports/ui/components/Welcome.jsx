@@ -12,7 +12,6 @@ export default Welcome = React.createClass ({
   },
 
   showNewCanvas() {
-    console.log('clicked')
     this.setState({
       newCanvas: true
     })
@@ -32,6 +31,7 @@ export default Welcome = React.createClass ({
         <NewCanvas 
           open={this.state.newCanvas} 
           handleClose={this.hideNewCanvas}
+          history={this.props.history}
         />
       </div> 
     )

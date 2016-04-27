@@ -1,9 +1,11 @@
 import React from 'react';
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import shortid from 'shortid'
+import {Canvases} from '../../api/canvases.js'
 
 export default NewCanvas = React.createClass({
 
@@ -19,7 +21,17 @@ export default NewCanvas = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(shortid.generate())
+    Canvases.insert({
+      _id: shortid.generate(),
+      name: this.state.name || 'Untitled',
+      createdAt: new Date()
+    }, (err, id) => {
+      if (err) {
+        console.log(err.message)
+      } else {
+        this.props.history.push(id);
+      }
+    })
   },
 
   render() {
