@@ -10,7 +10,7 @@ export default class Canvas extends Component {
   constructor(props) {
     super(props);
  
-    this.markLine = this.markLine.bind(this)
+    this.markPoint = this.markPoint.bind(this)
     this.renderPoints = this.renderPoints.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -18,15 +18,7 @@ export default class Canvas extends Component {
     this.handleMouseMove = this.handleMouseMove.bind(this)
 
     this.state = {
-      mouseDown: false,
-      start: {
-        x: null,
-        y: null
-      },
-      end: {
-        x: null,
-        y:null
-      }
+      mouseDown: false,   
     };
   }
 
@@ -39,27 +31,28 @@ export default class Canvas extends Component {
   }
 
   handleMouseDown(e) {
-    this.setState({ 
-      mouseDown: true,
-      start: this.getMousePos(e) 
-    })
-    // this.markPoint(this.getMousePos(e))
-    // this.setState({ mouseDown: true })
+    //  this.setState({ 
+    //   mouseDown: true,
+    //   start: this.getMousePos(e) 
+    // })
+    this.setState({ mouseDown: true })
+    var point = this.getMousePos(e)
+    point.lineAfter = true
+    this.markPoint(point)
   }
 
   handleMouseUp(e) {
     this.setState({ mouseDown: false })
+    var point = this.getMousePos(e)
+    point.lineAfter = false
+    this.markPoint(point)
   }
 
   handleMouseMove(e) {
     if (this.state.mouseDown) {
-      var start = this.getMousePos(e)
-      var end = this.state.start
-      this.setState({
-        start: start,
-        end: end
-      })
-      this.markLine(start, end)
+      var point = this.getMousePos(e)
+      point.lineAfter = true
+      this.markPoint(point)
     }
   }
 
@@ -67,15 +60,17 @@ export default class Canvas extends Component {
     Meteor.call('canvases.clear', this.props.id)
   }
 
-  markLine(start, end) {
-    Meteor.call('canvases.markLine', this.props.id, start, end)
+  markPoint(point) {
+    Meteor.call('canvases.markPoint', this.props.id, point, err => {
+      if (err) console.log(err)
+    })
   }
 
   renderPoints() {
-    var lines = this.props.lines || []
-    return lines.map( (line, index) => {
-      // return <circle key={index} cx={point.x} cy={point.y} r='8' fill='black' />
-      return <line className='line' key={index} {...line} />
+    var points = this.props.points || []
+    return points.map( (point, index) => {
+      return <circle key={index} cx={point.x} cy={point.y} r='3' fill='black' />
+      // return <line className='line' key={index} {...line} />
     })
   }
 

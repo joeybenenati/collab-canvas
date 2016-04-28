@@ -10,8 +10,9 @@ export default class ViewCanvas extends Component {
     return (
       <div>
         <h1>View Canvas: {this.props.name || ''} </h1>
-        <div className='container'></div>
-        <Canvas lines={this.props.lines} id={this.props._id}/>
+        <div className='container'>
+          <Canvas points={this.props.points} id={this.props._id}/>
+        </div>
       </div>
     )
   }
@@ -21,6 +22,6 @@ ViewCanvas.propTypes = {
   _id: PropTypes.string,
   name: PropTypes.string,
   createdAt: PropTypes.object,
-  lines: PropTypes.array
+  points: PropTypes.array
 }
 
