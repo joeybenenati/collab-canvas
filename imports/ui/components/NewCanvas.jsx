@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import shortid from 'shortid'
+import { Meteor } from 'meteor/meteor';
 import {Canvases} from '../../api/canvases.js'
 
 export default NewCanvas = React.createClass({
@@ -21,11 +22,8 @@ export default NewCanvas = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    Canvases.insert({
-      _id: shortid.generate(),
-      name: this.state.name || 'Untitled',
-      createdAt: new Date()
-    }, (err, id) => {
+
+    Meteor.call('canvases.insert', this.state.name, (err, id) => {
       if (err) {
         console.log(err.message)
       } else {
