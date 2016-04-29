@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/lib/text-field';
+import mui from 'material-ui'
 import shortid from 'shortid'
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 import {Canvases} from '../../api/canvases.js'
 
 export default class NewCanvas extends Component {
@@ -38,12 +35,12 @@ export default class NewCanvas extends Component {
 
   render() {
     const actions = [
-      <FlatButton
+      <mui.FlatButton
         label="Cancel"
         secondary={true}
         onTouchTap={this.props.handleClose}
       />,
-      <FlatButton
+      <mui.FlatButton
         label="Submit"
         primary={true}
         keyboardFocused={true}
@@ -52,18 +49,18 @@ export default class NewCanvas extends Component {
     ];
 
     return (
-      <Dialog
+      <mui.Dialog
         title="Create a new canvas session"
         actions={actions}
         modal={false}
         open={this.props.open}
         onRequestClose={this.props.handleClose}
       >
-      <TextField
+      <mui.TextField
         floatingLabelText="Name of Canvas"
         onChange={this.handleChange}
       />
-      </Dialog>
+      </mui.Dialog>
     )
   }
 }

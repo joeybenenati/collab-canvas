@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/lib/text-field';
+import mui from 'material-ui'
 import { Meteor } from 'meteor/meteor';
 
 
@@ -30,12 +27,12 @@ export default class JoinCanvas extends Component {
 
   render() {
     const actions = [
-      <FlatButton
+      <mui.FlatButton
         label="Cancel"
         secondary={true}
         onTouchTap={this.props.handleClose}
       />,
-      <FlatButton
+      <mui.FlatButton
         label="Join"
         primary={true}
         keyboardFocused={true}
@@ -44,18 +41,18 @@ export default class JoinCanvas extends Component {
     ];
 
     return (
-      <Dialog
+      <mui.Dialog
         title="Join an existing canvas"
         actions={actions}
         modal={false}
         open={this.props.open}
         onRequestClose={this.props.handleClose}
       >
-      <TextField
+      <mui.TextField
         floatingLabelText="Canvas Code"
         onChange={this.handleChange}
       />
-      </Dialog>
+      </mui.Dialog>
     )
   }
 }
