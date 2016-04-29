@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import mui from 'material-ui';
+import { Router, Route, Link } from 'react-router'
 
 import NewCanvas from './NewCanvas.jsx'
 import JoinCanvas from './JoinCanvas.jsx'
@@ -14,6 +15,7 @@ export default class App extends Component {
     this.hideNewCanvas = this.hideNewCanvas.bind(this)
     this.showJoinCanvas = this.showJoinCanvas.bind(this)
     this.hideJoinCanvas = this.hideJoinCanvas.bind(this)
+    this.routeHome = this.routeHome.bind(this)
 
     this.state = {
       open: false,
@@ -56,6 +58,10 @@ export default class App extends Component {
       joinCanvas: false
     })
   }
+
+  routeHome() {
+    this.props.history.push('/')
+  }
   
   render() {
     return (
@@ -71,9 +77,10 @@ export default class App extends Component {
         </mui.LeftNav>
         <header>
           <mui.AppBar
-            title="Collaborative Canvas"
+            title={<span style={styles.title}>Collaborative Canvas</span>}
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             className='navbar'
+            onTitleTouchTap={this.routeHome}
             onLeftIconButtonTouchTap={this.handleToggle}
           />
         </header>
@@ -92,3 +99,9 @@ export default class App extends Component {
     )
   }
 }
+
+const styles = {
+  title: {
+    cursor: 'pointer',
+  },
+};
