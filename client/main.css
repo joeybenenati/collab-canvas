@@ -1,8 +1,14 @@
 #canvas {
   width: 500px;
-  height: 500px;
-  border-width: 1px;
+  height: 400px;
+  border: thin;
+  border-style: solid;
+  border-width: 2px;
   border-color: black;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+
 }
 
 #canvas:hover {
@@ -10,6 +16,26 @@
 }
 
 .line {
-  stroke: black;
   stroke-width: 6;
+}
+
+.canvas-title h2,
+.canvas-title p {
+  margin-left: 20px;
+}
+
+.black {
+  stroke: black;
+}
+
+.blue {
+  stroke: blue;
+}
+
+.red {
+  stroke: red;
+}
+
+.green {
+  stroke: green;
 }

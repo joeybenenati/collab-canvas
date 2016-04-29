@@ -23,33 +23,29 @@ export default class Canvas extends Component {
     };
   }
 
-  getMousePos(e) {
+  makePointObj(e, lineBefore) {
     var offset = $('#canvas').offset()
     return {
       x: e.clientX - offset.left,
-      y: e.clientY - offset.top
+      y: e.clientY - offset.top,
+      color: this.props.color,
+      lineBefore: lineBefore
     }
   }
 
   handleMouseDown(e) {
     this.setState({ mouseDown: true })
-    var point = this.getMousePos(e)
-    point.lineBefore = false
-    this.markPoint(point)
+    this.markPoint(this.makePointObj(e, false))
   }
 
   handleMouseUp(e) {
     this.setState({ mouseDown: false })
-    var point = this.getMousePos(e)
-    point.lineBefore = true
-    this.markPoint(point)
+    this.markPoint(this.makePointObj(e, true))
   }
 
   handleMouseMove(e) {
     if (this.state.mouseDown) {
-      var point = this.getMousePos(e)
-      point.lineBefore = true
-      this.markPoint(point)
+      this.markPoint(this.makePointObj(e, true))
     }
   }
 
@@ -74,14 +70,12 @@ export default class Canvas extends Component {
     return points.map( (point, index) => {
       return point.lineBefore ? 
         [ 
-          <circle key={index} cx={point.x} cy={point.y} r='3' fill='black' />,
-          <line className='line' 
+          <circle key={index} cx={point.x} cy={point.y} r='3' fill={point.color} />,
+          <line className={'line ' + point.color} 
                 key={'line_' + index} x1={point.x} y1={point.y} 
                 x2={points[index-1].x} y2={points[index-1].y} />
         ] :
-        <circle key={index} cx={point.x} cy={point.y} r='3' fill='black' />
-      // return <circle key={index} cx={point.x} cy={point.y} r='3' fill='black' />
-      // return <line className='line' key={index} {...line} />
+        <circle key={index} cx={point.x} cy={point.y} r='3' fill={point.color} />
     })
   }
 
