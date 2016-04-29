@@ -2,12 +2,14 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import injectTapEventPlugin from 'react-tap-event-plugin';
  
 import App from '../imports/ui/components/App.jsx';
 import Welcome from '../imports/ui/components/Welcome.jsx'
 import CanvasContainer from '../imports/ui/containers/CanvasContainer.jsx'
 
 Meteor.startup(() => {
+  injectTapEventPlugin();
   render((
     <Router history={browserHistory}>
       <Route path="/" component={App}>

@@ -1,3 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+html, body, #app { 
+  height: 100%; 
+  margin: 0px; 
+  padding: 0px; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.navbar {
+  text-align: center;
+}
+
 #canvas {
   width: 500px;
   height: 400px;
@@ -22,6 +40,7 @@
 .canvas-title h2,
 .canvas-title p {
   margin-left: 20px;
+  margin-bottom: 5px;
 }
 
 .black {

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery'
 import { Meteor } from 'meteor/meteor';
-import d3 from 'd3'
 import {Canvases} from '../../api/canvases.js'
 
 

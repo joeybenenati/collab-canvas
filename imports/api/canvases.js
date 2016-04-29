@@ -36,3 +36,5 @@ Meteor.methods({
   }
 
 })
+
+// db.canvases.update({_id: 'Bk5FnygW'}, { $set: { points: [] }})

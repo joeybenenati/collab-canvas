@@ -27,6 +27,7 @@ export default Welcome = React.createClass ({
     return (
       <div className='container'>
         <h1>Welcome!</h1>
+        <p>Go ahead and create a new Collaborative Canvas to get started. Or you can join an existing canvas if you have a code.</p>
         <mui.RaisedButton label="New Canvas" primary={true} onClick={this.showNewCanvas}/>
         <NewCanvas 
           open={this.state.newCanvas} 
