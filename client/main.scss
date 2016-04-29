@@ -16,6 +16,12 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+
+.canvas-container {
+  padding-left: 25px;
+  padding-right: 25px
+}
+
 #canvas {
   width: 500px;
   height: 400px;
@@ -26,21 +32,27 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   margin: 0 auto;
   margin-top: 20px;
-
 }
 
 #canvas:hover {
   cursor: crosshair;
 }
 
-.line {
-  stroke-width: 6;
-}
-
 .canvas-title h2,
 .canvas-title p {
-  margin-left: 20px;
   margin-bottom: 5px;
+}
+
+/*BUTTONS*/
+
+.btn-clear {
+  padding-left: 20px;
+}
+
+/*DRAW ELEMENTS*/
+
+.line {
+  stroke-width: 6;
 }
 
 .black {

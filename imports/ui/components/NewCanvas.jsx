@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -8,17 +8,20 @@ import shortid from 'shortid'
 import { Meteor } from 'meteor/meteor';
 import {Canvases} from '../../api/canvases.js'
 
-export default NewCanvas = React.createClass({
+export default class NewCanvas extends Component {
 
-  getInitialState() {
-    return {
-      name: ''
-    }
-  },
+  constructor(props) {
+    super(props)
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.state = { name: '' }
+  }
 
   handleChange(e) {
     this.setState({ name: e.target.value })
-  },
+  }
 
   handleSubmit(e) {
     e.preventDefault()
@@ -31,7 +34,7 @@ export default NewCanvas = React.createClass({
         this.props.handleClose()
       }
     })
-  },
+  }
 
   render() {
     const actions = [
@@ -63,4 +66,4 @@ export default NewCanvas = React.createClass({
       </Dialog>
     )
   }
-})
+}

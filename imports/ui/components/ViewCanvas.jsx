@@ -32,7 +32,7 @@ export default class ViewCanvas extends Component {
           <div className='container-fluid canvas-title' >  
             <h2>{this.props.name || ''}</h2>
             <p>Code: {this.props._id}</p>
-            <mui.RaisedButton label="Clear Canvas" primary={true} onClick={this.handleClear}/>
+            <mui.RaisedButton className='btn-clear' label="Clear Canvas" primary={true} onClick={this.handleClear}/>
             <ColorPicker changeColor={this.changeColor} color={this.state.color} /> 
           </div>
           <Canvas points={this.props.points} id={this.props._id} color={this.state.color}/>

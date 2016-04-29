@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -7,24 +7,26 @@ import TextField from 'material-ui/lib/text-field';
 import { Meteor } from 'meteor/meteor';
 
 
-export default JoinCanvas = React.createClass({
+export default class JoinCanvas extends Component {
 
-  getInitialState() {
-    return {
-      id: ''
-    }
-  },
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.state = { id: '' }
+  }
 
   handleChange(e) {
-    console.log('change')
     this.setState({ id: e.target.value })
-  },
+  }
 
   handleSubmit(e) {
     e.preventDefault()
     this.props.handleClose()
     this.props.history.push(this.state.id);
-  },
+  }
 
   render() {
     const actions = [
@@ -56,4 +58,4 @@ export default JoinCanvas = React.createClass({
       </Dialog>
     )
   }
-})
+}
