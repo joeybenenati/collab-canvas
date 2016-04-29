@@ -71,7 +71,7 @@ export default class App extends Component {
         </mui.LeftNav>
         <header>
           <mui.AppBar
-            title="Collaboritive Canvas"
+            title="Collaborative Canvas"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             className='navbar'
             onLeftIconButtonTouchTap={this.handleToggle}

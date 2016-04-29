@@ -1,5 +1,5 @@
 {
-  "name": "formative-sample",
+  "name": "meteor-react-canvas",
   "private": true,
   "scripts": {
     "start": "meteor run"
