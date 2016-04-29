@@ -33,7 +33,6 @@ export default class Welcome extends Component {
   }
 
   showJoinCanvas() {
-    this.handleClose()
     this.setState({
       joinCanvas: true
     })
@@ -55,7 +54,7 @@ export default class Welcome extends Component {
         <h1>Welcome!</h1>
         <p>Go ahead and create a new Collaborative Canvas to get started. Or you can join an existing canvas if you have a code.</p>
         <mui.RaisedButton label="New Canvas" primary={true} style={btnStyle} onClick={this.showNewCanvas}/>
-        <mui.RaisedButton label="Join Canvas" secondary={true} style={btnStyle} onClick={this.showNewCanvas}/>
+        <mui.RaisedButton label="Join Canvas" secondary={true} style={btnStyle} onClick={this.showJoinCanvas}/>
         <NewCanvas 
           open={this.state.newCanvas} 
           handleClose={this.hideNewCanvas}
