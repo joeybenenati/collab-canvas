@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery'
 import { Meteor } from 'meteor/meteor';
-import d3 from 'd3'
 import {Canvases} from '../../api/canvases.js'
 
 
@@ -16,54 +15,42 @@ export default class Canvas extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
 
     this.state = {
-      mouseDown: false,
-      start: {
-        x: null,
-        y: null
-      },
-      end: {
-        x: null,
-        y:null
-      }
+      mouseDown: false,   
     };
   }
 
-  getMousePos(e) {
+  makePointObj(e, lineBefore) {
     var offset = $('#canvas').offset()
     return {
       x: e.clientX - offset.left,
-      y: e.clientY - offset.top
+      y: e.clientY - offset.top,
+      color: this.props.color,
+      lineBefore: lineBefore
     }
   }
 
   handleMouseDown(e) {
-    console.log('mouseDown')
     this.setState({ mouseDown: true })
-    var point = this.getMousePos(e)
-    point.lineAfter = true
-    this.markPoint(point)
+    this.markPoint(this.makePointObj(e, false))
   }
 
   handleMouseUp(e) {
     this.setState({ mouseDown: false })
-    var point = this.getMousePos(e)
-    point.lineAfter = false
-    this.markPoint(point)
+    this.markPoint(this.makePointObj(e, true))
   }
 
   handleMouseMove(e) {
     if (this.state.mouseDown) {
-      // var start = this.getMousePos(e)
-      // var end = this.state.start
-      // this.setState({
-      //   start: start,
-      //   end: end
-      // })
-      var point = this.getMousePos(e)
-      point.lineAfter = true
-      this.markPoint(point)
+      this.markPoint(this.makePointObj(e, true))
+    }
+  }
+
+  handleMouseLeave(e) {
+    if (this.state.mouseDown) {
+      this.handleMouseUp(e)
     }
   }
 
@@ -76,10 +63,16 @@ export default class Canvas extends Component {
   }
 
   renderPoints() {
-    var lines = this.props.lines || []
-    return lines.map( (line, index) => {
-      // return <circle key={index} cx={point.x} cy={point.y} r='8' fill='black' />
-      return <line className='line' key={index} {...line} />
+    var points = this.props.points || []
+    return points.map( (point, index) => {
+      return point.lineBefore ? 
+        [ 
+          <circle key={index} cx={point.x} cy={point.y} r='3' fill={point.color} />,
+          <line className={'line ' + point.color} 
+                key={'line_' + index} x1={point.x} y1={point.y} 
+                x2={points[index-1].x} y2={points[index-1].y} />
+        ] :
+        <circle key={index} cx={point.x} cy={point.y} r='3' fill={point.color} />
     })
   }
 
@@ -90,7 +83,7 @@ export default class Canvas extends Component {
            onMouseUp={this.handleMouseUp}
            onMouseMove={this.handleMouseMove}
            onDoubleClick={this.handleClear}
-           onMouseLeave={this.handleMouseUp}
+           onMouseLeave={this.handleMouseLeave}
            >
         {this.renderPoints()}
       </svg>

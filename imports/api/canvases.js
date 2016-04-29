@@ -23,18 +23,10 @@ Meteor.methods({
     })
   },
 
-  'canvases.markLine' (id, start, end) {
-    var newLine = {
-      x1: start.x,
-      y1: start.y,
-      x2: end.x,
-      y2: end.y
-    }
-    return Canvases.update({_id: id }, { $push: { lines: newLine } })
-  },
-
   'canvases.markPoint' (id, point) {
-    return Canvases.update({_id: id }, { $push: { points: point } })
+    return Canvases.update({_id: id }, { $push: { points: point } }, err => {
+      return err
+    })
   },
 
   'canvases.clear' (id) {
@@ -44,3 +36,4 @@ Meteor.methods({
   }
 
 })
+
